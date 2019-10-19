@@ -1,0 +1,4 @@
+Record=DiagramHierarchy|SourceDocument=ORD_SCH.MbsDoc|Kind=Multi-board Schematic Module|Designator=A1|Source=..\ORD_MAIN\OwlRoundDelay.PrjPcb
+Record=SubProject|SourceDocument=ORD_SCH.MbsDoc|ProjectPath=..\ORD_MAIN\OwlRoundDelay.PrjPcb
+Record=DiagramHierarchy|SourceDocument=ORD_SCH.MbsDoc|Kind=Multi-board Schematic Module|Designator=1|Source=..\ORD_POTS\ORD_POTS.PrjPcb
+Record=SubProject|SourceDocument=ORD_SCH.MbsDoc|ProjectPath=..\ORD_POTS\ORD_POTS.PrjPcb

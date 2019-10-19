@@ -1,8 +1,10 @@
 # Object file
 *.o
+*.MbsDoc.Zip
 *.PcbDoc.Zip
 *.SchDoc.Zip
 *.PrjPcb.Zip
+*.PrjMbd.Zip
 *.SchDocPreview
 *.LOG
 *.PrjPcbStructure
