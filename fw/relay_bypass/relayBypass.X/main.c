@@ -35,16 +35,21 @@ RC3 = 0x00;
             __delay_ms(15); // debounce
             if (RC2 == 0x00)
             {
-                if (state == 1) // pedal is on
+                __delay_ms(200);
+                
+                if (RC2 == 1)
                 {
-                    state = 0; // turn off
-                    RC3 = 0x00; // turn led off
-                }
+                    if (state == 1) // pedal is on
+                    {
+                        state = 0; // turn off
+                        RC3 = 0x00; // turn led off
+                    }
 
-                else // pedal is off
-                {
-                    state = 1; // turn on
-                    RC3 = 0xFF; // turn led on
+                    else // pedal is off
+                    {
+                        state = 1; // turn on
+                        RC3 = 0xFF; // turn led on
+                    }
                 }
             }
         }
