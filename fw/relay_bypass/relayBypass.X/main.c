@@ -23,12 +23,37 @@ ADCON0 = 0; // ADC and DAC converters off
 TRISC3 = 0x00; // set RC3 as output
 TRISC2 = 0xFF; // set RC2 as input
 //PORTC = 0x00;
-while (1)
-{
-    //PORTC = 0xFF;
-    RC3 = 0xFF;
-    __delay_ms(100);
-    RC3 = 0x00;
-    __delay_ms(100);
-}
+
+uint8_t state = 0;
+
+RC3 = 0x00;
+
+    while (1)
+    {
+        if (RC2 == 0x00) 
+        {
+            __delay_ms(15); // debounce
+            if (RC2 == 0x00)
+            {
+                if (state == 1) // pedal is on
+                {
+                    state = 0; // turn off
+                    RC3 = 0x00; // turn led off
+                }
+
+                else // pedal is off
+                {
+                    state = 1; // turn on
+                    RC3 = 0xFF; // turn led on
+                }
+            }
+        }
+        __delay_ms(10); 
+        /*
+        RC3 = 0xFF;
+        __delay_ms(100);
+        RC3 = 0x00;
+        __delay_ms(100);
+        */
+    }
 }
