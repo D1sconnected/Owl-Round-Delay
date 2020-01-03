@@ -21,19 +21,39 @@ void main ()
     
 ANSEL = 0; // no analog GPIO
 ADCON0 = 0; // ADC and DAC converters off
-
 TRISC3 = 0x00; // set RC3 as output
 TRISC2 = 0xFF; // set RC2 as input
-//PORTC = 0x00;
 
-uint8_t state = 0;
-
-RC3 = 0x00;
+pedalStatus pedalState = PEDAL_OFF;
+buttonStatus buttonState = BUTTON_RELEASED;
+RC3 = LOW;
 
     while (1)
     {
-        checkButtonState(&state);
-        __delay_ms(10); 
+        if (RC2 == LOW)
+        {
+            buttonState = BUTTON_PRESSED;
+        }
+        
+        switch(pedalState)
+        {
+            case PEDAL_OFF:
+                if (RC2 == HIGH && buttonState == BUTTON_PRESSED)
+                {
+                    pedalState = PEDAL_ON;
+                    RC3 = HIGH; 
+                    buttonState = BUTTON_RELEASED;
+                }  
+            break;
+            case PEDAL_ON:
+                if (RC2 == HIGH && buttonState == BUTTON_PRESSED)
+                {
+                    pedalState = PEDAL_OFF;
+                    RC3 = LOW; 
+                    buttonState = BUTTON_RELEASED;
+                }  
+            break;
+        }
     }
 }
 

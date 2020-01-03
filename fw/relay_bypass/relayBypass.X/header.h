@@ -16,3 +16,18 @@
 
 // Define oscillator frequency
 #define _XTAL_FREQ 8000000
+
+#define HIGH 1
+#define LOW 0
+
+typedef enum 
+{
+    PEDAL_ON,
+    PEDAL_OFF
+}   pedalStatus;
+
+typedef enum 
+{
+    BUTTON_PRESSED = 1,
+    BUTTON_RELEASED = 0
+}   buttonStatus;
