@@ -14,6 +14,8 @@
 // Include configuration bits
 #include "header.h"
 
+void checkButtonState (uint8_t *pState);
+
 void main ()
 {
     
@@ -30,6 +32,13 @@ RC3 = 0x00;
 
     while (1)
     {
+        checkButtonState(&state);
+        __delay_ms(10); 
+    }
+}
+
+void checkButtonState (uint8_t *pState)
+{
         if (RC2 == 0x00) 
         {
             __delay_ms(15); // debounce
@@ -39,26 +48,18 @@ RC3 = 0x00;
                 
                 if (RC2 == 1)
                 {
-                    if (state == 1) // pedal is on
+                    if (*pState == 1) // pedal is on
                     {
-                        state = 0; // turn off
+                        *pState = 0; // turn off
                         RC3 = 0x00; // turn led off
                     }
 
                     else // pedal is off
                     {
-                        state = 1; // turn on
+                        *pState = 1; // turn on
                         RC3 = 0xFF; // turn led on
                     }
                 }
             }
         }
-        __delay_ms(10); 
-        /*
-        RC3 = 0xFF;
-        __delay_ms(100);
-        RC3 = 0x00;
-        __delay_ms(100);
-        */
-    }
 }
