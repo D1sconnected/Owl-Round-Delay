@@ -22,11 +22,15 @@ void main ()
 ANSEL = 0; // no analog GPIO
 ADCON0 = 0; // ADC and DAC converters off
 TRISC3 = 0x00; // set RC3 as output
+TRISC1 = 0x00; // set RC1 as output
+TRISC0 = 0x00; // set RC0 as output
 TRISC2 = 0xFF; // set RC2 as input
 
 pedalStatus pedalState = PEDAL_OFF;
 buttonStatus buttonState = BUTTON_RELEASED;
 RC3 = LOW;
+RC1 = LOW;
+RC0 = LOW;
 
     while (1)
     {
@@ -41,7 +45,8 @@ RC3 = LOW;
                 if (RC2 == HIGH && buttonState == BUTTON_PRESSED)
                 {
                     pedalState = PEDAL_ON;
-                    RC3 = HIGH; 
+                    RC3 = HIGH; // enable led
+                    RC1 = HIGH; // enable rele
                     buttonState = BUTTON_RELEASED;
                 }  
             break;
@@ -49,7 +54,8 @@ RC3 = LOW;
                 if (RC2 == HIGH && buttonState == BUTTON_PRESSED)
                 {
                     pedalState = PEDAL_OFF;
-                    RC3 = LOW; 
+                    RC3 = LOW; // disable led
+                    RC1 = LOW; // disable rele
                     buttonState = BUTTON_RELEASED;
                 }  
             break;
